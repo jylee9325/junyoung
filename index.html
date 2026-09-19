@@ -767,7 +767,6 @@ h1 {
 
     <div class="nav-right">
 
-        <!-- 등차수열 왼쪽에 수열 분석기 버튼 배치 -->
         <button class="nav-btn" onclick="openAnalyzer()">
             수열 분석기
         </button>
@@ -937,7 +936,7 @@ h1 {
         
         <div class="input-group">
             <input type="text" id="sequenceInput" placeholder="수열 데이터 (예: 1 2 4 8 16)">
-            <input type="number" id="targetNInput" placeholder="구하고 싶은 n번째 항" value="10" min="1">
+            <input type="number" id="targetNInput" placeholder="예측하고 싶은 n번째 항" min="1">
         </div>
 
         <button class="btn-analyze" style="width: 100%;" onclick="runAnalyzer()">분석 및 예측하기</button>
@@ -946,7 +945,7 @@ h1 {
             <span id="resultType" class="result-tag">등비수열</span><br>
             📌 <strong>최적 일반항:</strong> <span id="resultFormula">a_n = ...</span><br>
             📏 <strong>평균 오차:</strong> ±<span id="resultError">0.0000</span><br>
-            🎯 <strong><span id="targetNLabel">10</span>번째 항 예측값:</strong> <span id="resultValue" style="font-weight: bold; color: #000;">0</span>
+            🎯 <strong><span id="targetNLabel">n</span>번째 항 예측값:</strong> <span id="resultValue" style="font-weight: bold; color: #000;">0</span>
         </div>
     </div>
 </div>
@@ -990,7 +989,7 @@ function runAnalyzer() {
     }
 
     if (isNaN(targetN) || targetN <= 0) {
-        alert("⚠️ 항 번호 n은 1 이상의 자연수여야 합니다.");
+        alert("⚠️ 예측하고 싶은 n번째 항(1 이상의 자연수)을 입력해주세요.");
         return;
     }
 
