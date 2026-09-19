@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Profile — HOME</title>
+
+<!-- 구글 폰트: 필기체(Great Vibes) 불러오기 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
 body{font-family:Arial,"Noto Sans KR",sans-serif;background:#f7f7f5;color:#111;overflow-x:hidden}
@@ -21,7 +27,16 @@ nav a:hover:after{width:100%}
 .eyebrow{font-size:11px;letter-spacing:.22em;color:#777;margin-bottom:25px}
 .title-row{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
 h1{font-size:clamp(60px,9vw,130px);line-height:.85;letter-spacing:-.06em;font-weight:800}
-.number{font-family:Georgia,serif;font-size:110px;line-height:.8;color:#ddd}
+
+/* 필기체 스타일로 수정된 .number 영역 */
+.number{
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(45px, 6vw, 85px);
+    line-height: .9;
+    color: #ccc;
+    font-weight: 400;
+    white-space: nowrap;
+}
 
 .profile-grid{margin-top:80px;display:grid;grid-template-columns:320px 1fr;gap:70px;align-items:start}
 .photo-box{position:relative;border:1px solid #111;padding:12px;background:#fff}
@@ -48,7 +63,7 @@ h1{font-size:clamp(60px,9vw,130px);line-height:.85;letter-spacing:-.06em;font-we
     .nav-right{gap:13px}
     .page{padding-top:55px}
     .title-row{display:block}
-    .number{font-size:70px;margin-top:25px}
+    .number{font-size:50px;margin-top:15px}
     .profile-grid{grid-template-columns:1fr;gap:40px}
     .photo-box{max-width:280px;margin:auto}
     .info-item{grid-template-columns:110px 1fr;font-size:14px}
@@ -72,7 +87,9 @@ h1{font-size:clamp(60px,9vw,130px);line-height:.85;letter-spacing:-.06em;font-we
 <div class="eyebrow">STUDENT PROFILE / ARCHIVE</div>
 <div class="title-row">
     <h1>PROFILE<span style="color:#bbb">.</span></h1>
-    <div class="number">00</div>
+    
+    <!-- 00 대신 필기체로 표기할 문구 적용 -->
+    <div class="number">Lee Jun Young</div>
 </div>
 
 <div class="profile-grid">
