@@ -113,7 +113,7 @@ nav {
 }
 
 
-nav a {
+nav a, nav button.nav-btn {
 
     color: #111;
 
@@ -122,13 +122,18 @@ nav a {
     font-size: 13px;
 
     position: relative;
+    
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
 
 }
 
 
 /* 마우스를 올리면 밑줄 */
 
-nav a::after {
+nav a::after, nav button.nav-btn::after {
 
     content: "";
 
@@ -147,7 +152,7 @@ nav a::after {
 }
 
 
-nav a:hover::after {
+nav a:hover::after, nav button.nav-btn:hover::after {
 
     width: 100%;
 
@@ -500,6 +505,205 @@ h1 {
 
 
 /* =========================
+   모달 (수열 분석기 팝업 창)
+========================= */
+
+.modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    backdrop-filter: blur(4px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 100;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: opacity .3s ease;
+
+}
+
+
+.modal-overlay.active {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+}
+
+
+.analyzer-card {
+
+    background: #fff;
+
+    border: 1px solid #111;
+
+    padding: 32px;
+
+    width: min(520px, 90%);
+
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+    position: relative;
+
+}
+
+
+.close-btn {
+
+    position: absolute;
+
+    top: 20px;
+
+    right: 20px;
+
+    background: none;
+
+    border: none;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    color: #888;
+
+}
+
+
+.close-btn:hover {
+
+    color: #111;
+
+}
+
+
+.analyzer-card h2 {
+
+    font-size: 14px;
+
+    letter-spacing: .18em;
+
+    margin-bottom: 22px;
+
+    color: #111;
+
+}
+
+
+.input-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.input-group input {
+
+    padding: 12px 14px;
+
+    border: 1px solid #ccc;
+
+    background: #fdfdfd;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition: border-color .2s;
+
+}
+
+
+.input-group input:focus {
+
+    border-color: #111;
+
+}
+
+
+.btn-analyze {
+
+    padding: 12px;
+
+    background: #111;
+
+    color: #fff;
+
+    border: none;
+
+    font-size: 12px;
+
+    letter-spacing: .1em;
+
+    cursor: pointer;
+
+    transition: background .2s;
+
+}
+
+
+.btn-analyze:hover {
+
+    background: #333;
+
+}
+
+
+.result-box {
+
+    margin-top: 20px;
+
+    padding-top: 18px;
+
+    border-top: 1px dashed #ccc;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    color: #222;
+
+    display: none;
+
+}
+
+
+.result-tag {
+
+    display: inline-block;
+
+    padding: 2px 8px;
+
+    background: #111;
+
+    color: #fff;
+
+    font-size: 11px;
+
+    margin-bottom: 8px;
+
+}
+
+
+/* =========================
    모바일
 ========================= */
 
@@ -562,6 +766,11 @@ h1 {
 
 
     <div class="nav-right">
+
+        <!-- 등차수열 왼쪽에 수열 분석기 버튼 배치 -->
+        <button class="nav-btn" onclick="openAnalyzer()">
+            수열 분석기
+        </button>
 
         <a href="arithmetic.html">
             등차수열
@@ -714,6 +923,170 @@ h1 {
 
 
 </main>
+
+
+
+<!-- =========================
+     수열 분석기 모달 팝업
+========================= -->
+
+<div id="analyzerModal" class="modal-overlay" onclick="closeAnalyzerOnBg(event)">
+    <div class="analyzer-card">
+        <button class="close-btn" onclick="closeAnalyzer()">&times;</button>
+        <h2>🧮 SEQUENCE ANALYZER</h2>
+        
+        <div class="input-group">
+            <input type="text" id="sequenceInput" placeholder="수열 데이터 (예: 1 2 4 8 16)">
+            <input type="number" id="targetNInput" placeholder="구하고 싶은 n번째 항" value="10" min="1">
+        </div>
+
+        <button class="btn-analyze" style="width: 100%;" onclick="runAnalyzer()">분석 및 예측하기</button>
+
+        <div id="resultBox" class="result-box">
+            <span id="resultType" class="result-tag">등비수열</span><br>
+            📌 <strong>최적 일반항:</strong> <span id="resultFormula">a_n = ...</span><br>
+            📏 <strong>평균 오차:</strong> ±<span id="resultError">0.0000</span><br>
+            🎯 <strong><span id="targetNLabel">10</span>번째 항 예측값:</strong> <span id="resultValue" style="font-weight: bold; color: #000;">0</span>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- =========================
+     스크립트 (파이썬 변환 알고리즘)
+========================= -->
+
+<script>
+function openAnalyzer() {
+    document.getElementById("analyzerModal").classList.add("active");
+}
+
+function closeAnalyzer() {
+    document.getElementById("analyzerModal").classList.remove("active");
+}
+
+function closeAnalyzerOnBg(event) {
+    if (event.target.id === "analyzerModal") {
+        closeAnalyzer();
+    }
+}
+
+function runAnalyzer() {
+    const inputStr = document.getElementById("sequenceInput").value.trim();
+    const targetN = parseInt(document.getElementById("targetNInput").value);
+
+    if (!inputStr) {
+        alert("수열 데이터를 입력해주세요.");
+        return;
+    }
+
+    const data = inputStr.split(/\s+/).map(Number).filter(n => !isNaN(n));
+    const n = data.length;
+
+    if (n < 3) {
+        alert("❌ 최소 3개 이상의 데이터가 필요합니다.");
+        return;
+    }
+
+    if (isNaN(targetN) || targetN <= 0) {
+        alert("⚠️ 항 번호 n은 1 이상의 자연수여야 합니다.");
+        return;
+    }
+
+    let candidates = [];
+
+    // 1. 등차수열
+    const a1_arith = data[0];
+    let sum_d = 0, count_d = 0;
+    for (let i = 1; i < n; i++) {
+        sum_d += (data[i] - data[0]);
+        count_d += i;
+    }
+    const d_avg = sum_d / count_d;
+    const pred_arith = data.map((_, i) => a1_arith + i * d_avg);
+    const err_arith = pred_arith.reduce((acc, p, i) => acc + Math.pow(data[i] - p, 2), 0) / n;
+
+    candidates.push({
+        type: '등차수열',
+        error: err_arith,
+        formula: `a_n = ${a1_arith.toFixed(3)} + (n - 1) * ${d_avg.toFixed(3)}`,
+        calc: (target) => a1_arith + (target - 1) * d_avg
+    });
+
+    // 2. 등비수열
+    if (!data.includes(0)) {
+        let r_list = [];
+        for (let i = 0; i < n - 1; i++) {
+            r_list.push(data[i + 1] / data[i]);
+        }
+        const r_avg = r_list.reduce((a, b) => a + b, 0) / r_list.length;
+        const a1_geom = data[0];
+        const pred_geom = data.map((_, i) => a1_geom * Math.pow(r_avg, i));
+        const err_geom = pred_geom.reduce((acc, p, i) => acc + Math.pow(data[i] - p, 2), 0) / n;
+
+        candidates.push({
+            type: '등비수열',
+            error: err_geom,
+            formula: `a_n = ${a1_geom.toFixed(3)} * (${r_avg.toFixed(3)}^(n - 1))`,
+            calc: (target) => a1_geom * Math.pow(r_avg, target - 1)
+        });
+    }
+
+    // 3. 조화수열
+    if (!data.includes(0)) {
+        const recips = data.map(x => 1 / x);
+        const a1_recip = recips[0];
+        let sum_recip_d = 0, count_recip_d = 0;
+        for (let i = 1; i < n; i++) {
+            sum_recip_d += (recips[i] - recips[0]);
+            count_recip_d += i;
+        }
+        const d_recip_avg = sum_recip_d / count_recip_d;
+        const pred_harm = recips.map((_, i) => 1 / (a1_recip + i * d_recip_avg));
+        const err_harm = pred_harm.reduce((acc, p, i) => acc + Math.pow(data[i] - p, 2), 0) / n;
+
+        candidates.push({
+            type: '조화수열',
+            error: err_harm,
+            formula: `a_n = 1 / (${a1_recip.toFixed(4)} + (n - 1) * ${d_recip_avg.toFixed(4)})`,
+            calc: (target) => 1 / (a1_recip + (target - 1) * d_recip_avg)
+        });
+    }
+
+    // 4. 계차수열
+    let diffs = [];
+    for (let i = 0; i < n - 1; i++) diffs.push(data[i + 1] - data[i]);
+    const b1 = diffs[0];
+
+    let second_diffs = [];
+    for (let i = 0; i < diffs.length - 1; i++) second_diffs.push(diffs[i + 1] - diffs[i]);
+    const c_avg = second_diffs.length > 0 ? second_diffs.reduce((a, b) => a + b, 0) / second_diffs.length : 0;
+    const a1_diff = data[0];
+
+    const pred_diff = data.map((_, i) => a1_diff + i * b1 + (i * (i - 1) / 2) * c_avg);
+    const err_diff = pred_diff.reduce((acc, p, i) => acc + Math.pow(data[i] - p, 2), 0) / n;
+
+    candidates.push({
+        type: '계차수열',
+        error: err_diff,
+        formula: `a_n = ${a1_diff.toFixed(3)} + (n-1)*${b1.toFixed(3)} + (n-1)(n-2)/2 * ${c_avg.toFixed(3)}`,
+        calc: (target) => a1_diff + (target - 1) * b1 + ((target - 1) * (target - 2) / 2) * c_avg
+    });
+
+    candidates.sort((a, b) => a.error - b.error);
+    const bestModel = candidates[0];
+    const predictedVal = bestModel.calc(targetN);
+
+    document.getElementById("resultType").innerText = bestModel.type;
+    document.getElementById("resultFormula").innerText = bestModel.formula;
+    document.getElementById("resultError").innerText = Math.sqrt(bestModel.error).toFixed(4);
+    document.getElementById("targetNLabel").innerText = targetN;
+    document.getElementById("resultValue").innerText = predictedVal.toLocaleString('ko-KR', { maximumFractionDigits: 4 });
+
+    document.getElementById("resultBox").style.display = "block";
+}
+</script>
 
 
 </body>
