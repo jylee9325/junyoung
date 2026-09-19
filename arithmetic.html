@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>등차수열 — Sequence</title>
+
+
+<style>
+
+* {
+
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 0;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    font-family:
+        Arial,
+        "Noto Sans KR",
+        sans-serif;
+
+    background: #f7f7f5;
+
+    color: #111;
+
+    overflow-x: hidden;
+
+}
+
+
+/* 배경 */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+
+    background-image:
+
+        linear-gradient(
+            rgba(0,0,0,.035) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.035) 1px,
+            transparent 1px
+        );
+
+
+    background-size: 42px 42px;
+
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 90%
+        );
+
+}
+
+
+/* =========================
+   NAV
+========================= */
+
+nav {
+
+    width: min(1180px, 85%);
+
+    height: 86px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.name {
+
+    font-size: 14px;
+
+}
+
+
+.nav-right {
+
+    display: flex;
+
+    gap: 30px;
+
+}
+
+
+nav a {
+
+    color: #111;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    position: relative;
+
+}
+
+
+nav a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -7px;
+
+    width: 0;
+
+    height: 1px;
+
+    background: #111;
+
+    transition: .3s;
+
+}
+
+
+nav a:hover::after {
+
+    width: 100%;
+
+}
+
+
+/* =========================
+   페이지
+========================= */
+
+.page {
+
+    width: min(1180px, 85%);
+
+    margin: auto;
+
+    padding: 75px 0 120px;
+
+}
+
+
+/* 작은 제목 */
+
+.eyebrow {
+
+    font-size: 11px;
+
+    letter-spacing: .22em;
+
+    color: #777;
+
+    margin-bottom: 25px;
+
+}
+
+
+/* 제목 */
+
+.title-row {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+}
+
+
+h1 {
+
+    font-size:
+        clamp(
+            70px,
+            10vw,
+            145px
+        );
+
+    line-height: .82;
+
+    letter-spacing: -.075em;
+
+    font-weight: 800;
+
+}
+
+
+.number {
+
+    font-family: Georgia, serif;
+
+    font-size: 110px;
+
+    line-height: .8;
+
+    color: #ddd;
+
+    font-weight: normal;
+
+}
+
+
+/* 설명 */
+
+.intro {
+
+    max-width: 650px;
+
+    margin-top: 42px;
+
+    font-size: 16px;
+
+    line-height: 1.9;
+
+    color: #555;
+
+}
+
+
+/* 공식 */
+
+.formula {
+
+    margin-top: 42px;
+
+    border-top: 1px solid #111;
+
+    border-bottom: 1px solid #111;
+
+    padding: 25px 0;
+
+    font-family: Georgia, serif;
+
+    font-size: 28px;
+
+}
+
+
+.formula small {
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    color: #777;
+
+    margin-left: 20px;
+
+}
+
+
+/* =========================
+   메뉴
+========================= */
+
+.menu {
+
+    margin-top: 75px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    border-top: 1px solid #111;
+
+    border-left: 1px solid #111;
+
+}
+
+
+.menu a {
+
+    min-height: 145px;
+
+    padding: 22px;
+
+    border-right: 1px solid #111;
+
+    border-bottom: 1px solid #111;
+
+    text-decoration: none;
+
+    color: #111;
+
+    transition: .3s;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+}
+
+
+.menu a:hover {
+
+    background: #111;
+
+    color: white;
+
+}
+
+
+.menu .num {
+
+    font-size: 11px;
+
+    letter-spacing: .1em;
+
+}
+
+
+.menu .label {
+
+    font-size: 18px;
+
+}
+
+
+.menu .eng {
+
+    font-size: 10px;
+
+    letter-spacing: .15em;
+
+    opacity: .5;
+
+}
+
+
+/* =========================
+   내용
+========================= */
+
+.content {
+
+    margin-top: 100px;
+
+}
+
+
+.section {
+
+    display: grid;
+
+    grid-template-columns: 180px 1fr;
+
+    gap: 50px;
+
+    padding: 55px 0;
+
+    border-top: 1px solid #ccc;
+
+}
+
+
+.section:last-child {
+
+    border-bottom: 1px solid #ccc;
+
+}
+
+
+.section-num {
+
+    font-family: Georgia, serif;
+
+    font-size: 34px;
+
+    color: #aaa;
+
+}
+
+
+.section h2 {
+
+    font-size: 30px;
+
+    letter-spacing: -.04em;
+
+    margin-bottom: 22px;
+
+}
+
+
+.section p {
+
+    font-size: 15px;
+
+    line-height: 2;
+
+    color: #555;
+
+    max-width: 720px;
+
+}
+
+
+/* 수열 예시 */
+
+.example {
+
+    margin-top: 25px;
+
+    padding: 25px;
+
+    background: #111;
+
+    color: white;
+
+    font-family: Georgia, serif;
+
+    font-size: 22px;
+
+    letter-spacing: .04em;
+
+}
+
+
+.example span {
+
+    color: #aaa;
+
+    margin: 0 8px;
+
+}
+
+
+/* 뒤로가기 */
+
+.back {
+
+    display: inline-block;
+
+    margin-top: 65px;
+
+    color: #111;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    letter-spacing: .12em;
+
+}
+
+
+/* =========================
+   모바일
+========================= */
+
+@media(max-width:800px) {
+
+    .nav-right {
+
+        gap: 13px;
+
+    }
+
+
+    .page {
+
+        padding-top: 55px;
+
+    }
+
+
+    .title-row {
+
+        display: block;
+
+    }
+
+
+    .number {
+
+        font-size: 70px;
+
+        margin-top: 25px;
+
+    }
+
+
+    .menu {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .section {
+
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     상단 메뉴
+========================= -->
+
+<nav>
+
+
+    <a
+        class="name"
+        href="index.html"
+    >
+        이준영
+    </a>
+
+
+    <div class="nav-right">
+
+
+        <a href="arithmetic.html">
+            등차수열
+        </a>
+
+
+        <a href="#">
+            등비수열
+        </a>
+
+
+        <a href="#">
+            조화수열
+        </a>
+
+
+        <a href="#">
+            계차수열
+        </a>
+
+
+    </div>
+
+
+</nav>
+
+
+
+<main class="page">
+
+
+    <!-- 제목 -->
+
+    <div class="eyebrow">
+        SEQUENCE / 01
+    </div>
+
+
+    <div class="title-row">
+
+        <h1>
+            등차수열<span style="color:#bbb">.</span>
+        </h1>
+
+
+        <div class="number">
+            01
+        </div>
+
+    </div>
+
+
+    <!-- 설명 -->
+
+    <p class="intro">
+
+        일정한 수를 계속해서 더해 가며 만들어지는 수열.
+        단순한 숫자의 나열에서 일정한 규칙을 발견하고,
+        그 규칙을 일반항과 합의 형태로 표현해 본다.
+
+    </p>
+
+
+    <!-- 공식 -->
+
+    <div class="formula">
+
+        aₙ = a₁ + (n − 1)d
+
+        <small>
+            일반항
+        </small>
+
+    </div>
+
+
+
+    <!-- =========================
+         메뉴
+    ========================= -->
+
+    <div class="menu">
+
+
+        <a href="#theory">
+
+            <span class="num">
+                01
+            </span>
+
+            <span class="label">
+                이론
+            </span>
+
+            <span class="eng">
+                THEORY
+            </span>
+
+        </a>
+
+
+        <a href="#general">
+
+            <span class="num">
+                02
+            </span>
+
+            <span class="label">
+                일반항
+            </span>
+
+            <span class="eng">
+                GENERAL TERM
+            </span>
+
+        </a>
+
+
+        <a href="#real">
+
+            <span class="num">
+                03
+            </span>
+
+            <span class="label">
+                실생활 속 예시
+            </span>
+
+            <span class="eng">
+                REAL LIFE
+            </span>
+
+        </a>
+
+
+        <a href="#explore">
+
+            <span class="num">
+                04
+            </span>
+
+            <span class="label">
+                나의 탐구
+            </span>
+
+            <span class="eng">
+                MY RESEARCH
+            </span>
+
+        </a>
+
+
+        <a href="#problem">
+
+            <span class="num">
+                05
+            </span>
+
+            <span class="label">
+                문제로 이해하기
+            </span>
+
+            <span class="eng">
+                EXAMPLE
+            </span>
+
+        </a>
+
+
+        <a href="#compare">
+
+            <span class="num">
+                06
+            </span>
+
+            <span class="label">
+                다른 수열과 비교
+            </span>
+
+            <span class="eng">
+                COMPARE
+            </span>
+
+        </a>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         본문
+    ========================= -->
+
+    <div class="content">
+
+
+        <!-- 이론 -->
+
+        <section
+            class="section"
+            id="theory"
+        >
+
+            <div class="section-num">
+                01
+            </div>
+
+
+            <div>
+
+                <h2>
+                    이론
+                </h2>
+
+
+                <p>
+
+                    등차수열은 연속한 두 항의 차이가
+                    항상 일정한 수열이다.
+                    이때 일정한 차이를 공차라고 하며
+                    d로 나타낸다.
+                    공차가 양수이면 항이 증가하고,
+                    음수이면 항이 감소한다.
+
+                </p>
+
+
+                <div class="example">
+
+                    3
+                    <span>→</span>
+                    7
+                    <span>→</span>
+                    11
+                    <span>→</span>
+                    15
+                    <span>→</span>
+                    19
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- 일반항 -->
+
+        <section
+            class="section"
+            id="general"
+        >
+
+            <div class="section-num">
+                02
+            </div>
+
+
+            <div>
+
+                <h2>
+                    일반항
+                </h2>
+
+
+                <p>
+
+                    첫째 항을 a₁,
+                    공차를 d라고 하면
+                    n번째 항은 첫째 항에
+                    공차를 n−1번 더한 값으로
+                    표현할 수 있다.
+
+                </p>
+
+
+                <div class="example">
+
+                    aₙ = a₁ + (n − 1)d
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- 실생활 -->
+
+        <section
+            class="section"
+            id="real"
+        >
+
+            <div class="section-num">
+                03
+            </div>
+
+
+            <div>
+
+                <h2>
+                    실생활 속 예시
+                </h2>
+
+
+                <p>
+
+                    일정한 간격으로 증가하거나
+                    감소하는 현상에서 등차수열을
+                    발견할 수 있다.
+
+                    예를 들어 일정한 금액씩 저축하는
+                    상황, 일정한 간격으로 배치된
+                    좌석이나 조명, 일정한 규칙으로
+                    증가하는 단계 등을 수열로
+                    표현할 수 있다.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- 나의 탐구 -->
+
+        <section
+            class="section"
+            id="explore"
+        >
+
+            <div class="section-num">
+                04
+            </div>
+
+
+            <div>
+
+                <h2>
+                    나의 탐구
+                </h2>
+
+
+                <p>
+
+                    직접 관찰하고 측정한 자료에서
+                    규칙을 찾고, 그 자료가 어떤
+                    수열과 가까운지 분석해 보는 공간이다.
+
+                    실제 실험 데이터와 프로그램을
+                    연결하여 수열의 규칙을 찾아보는
+                    방향으로 확장할 수 있다.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- 문제 -->
+
+        <section
+            class="section"
+            id="problem"
+        >
+
+            <div class="section-num">
+                05
+            </div>
+
+
+            <div>
+
+                <h2>
+                    문제로 이해하기
+                </h2>
+
+
+                <p>
+
+                    수열의 첫째 항과 공차가 주어졌을 때
+                    원하는 항을 구하거나,
+                    특정 항에서 다른 항까지의 규칙을
+                    역으로 찾아보는 문제를 통해
+                    등차수열의 구조를 확인할 수 있다.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- 비교 -->
+
+        <section
+            class="section"
+            id="compare"
+        >
+
+            <div class="section-num">
+                06
+            </div>
+
+
+            <div>
+
+                <h2>
+                    다른 수열과 비교
+                </h2>
+
+
+                <p>
+
+                    등차수열은 '더하기'라는 규칙을
+                    중심으로 만들어진다.
+
+                    등비수열은 일정한 비율로
+                    곱해지는 반면,
+                    계차수열은 항과 항 사이의
+                    차이 자체를 새로운 수열로
+                    바라본다는 점에서 서로
+                    다른 특징을 가진다.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+
+
+    <a
+        class="back"
+        href="index.html"
+    >
+
+        ← BACK TO SEQUENCE
+
+    </a>
+
+
+</main>
+
+
+</body>
+</html>
