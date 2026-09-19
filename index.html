@@ -81,7 +81,27 @@ nav {
 
     font-size: 14px;
     letter-spacing: .04em;
+    color: #111;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
 
+}
+
+/* 이준영 이름 밑줄 효과 */
+.name::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+    width: 0;
+    height: 1px;
+    background: #111;
+    transition: .3s;
+}
+
+.name:hover::after {
+    width: 100%;
 }
 
 
@@ -536,9 +556,10 @@ h1 {
 
 <nav>
 
-    <div class="name">
+    <!-- 클릭 시 profile.html로 이동하도록 수정 -->
+    <a class="name" href="profile.html">
         이준영
-    </div>
+    </a>
 
 
     <div class="nav-right">
@@ -547,15 +568,15 @@ h1 {
             등차수열
         </a>
 
-        <a href="#">
+        <a href="geometric.html">
             등비수열
         </a>
 
-        <a href="#">
+        <a href="harmonic.html">
             조화수열
         </a>
 
-        <a href="#">
+        <a href="difference.html">
             계차수열
         </a>
 
@@ -665,21 +686,21 @@ h1 {
 
         <a
             class="card"
-            href="#"
+            href="geometric.html"
         >
             02 GEOMETRIC
         </a>
 
         <a
             class="card"
-            href="#"
+            href="harmonic.html"
         >
             03 HARMONIC
         </a>
 
         <a
             class="card"
-            href="#"
+            href="difference.html"
         >
             04 DIFFERENCE
         </a>
