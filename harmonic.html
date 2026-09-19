@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>조화수열 — Sequence</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:Arial,"Noto Sans KR",sans-serif;background:#f7f7f5;color:#111;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(0,0,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,#000,transparent 90%)}
+nav{width:min(1180px,85%);height:86px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+.name{font-size:14px}.nav-right{display:flex;gap:30px}
+nav a{color:#111;text-decoration:none;font-size:13px;position:relative}
+nav a:after{content:"";position:absolute;left:0;bottom:-7px;width:0;height:1px;background:#111;transition:.3s}
+nav a:hover:after{width:100%}
+.page{width:min(1180px,85%);margin:auto;padding:75px 0 120px}
+.eyebrow{font-size:11px;letter-spacing:.22em;color:#777;margin-bottom:25px}
+.title-row{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+h1{font-size:clamp(70px,10vw,145px);line-height:.82;letter-spacing:-.075em;font-weight:800}
+.number{font-family:Georgia,serif;font-size:110px;line-height:.8;color:#ddd}
+.intro{max-width:680px;margin-top:42px;font-size:16px;line-height:1.9;color:#555}
+.formula{margin-top:42px;border-top:1px solid #111;border-bottom:1px solid #111;padding:25px 0;font:28px Georgia,serif}
+.formula small{font:11px Arial,sans-serif;color:#777;margin-left:20px}
+.menu{margin-top:75px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #111;border-left:1px solid #111}
+.menu a{min-height:145px;padding:22px;border-right:1px solid #111;border-bottom:1px solid #111;text-decoration:none;color:#111;transition:.3s;display:flex;flex-direction:column;justify-content:space-between}
+.menu a:hover{background:#111;color:#fff}.menu .num{font-size:11px;letter-spacing:.1em}.menu .label{font-size:18px}.menu .eng{font-size:10px;letter-spacing:.15em;opacity:.5}
+.content{margin-top:100px}.section{display:grid;grid-template-columns:180px 1fr;gap:50px;padding:55px 0;border-top:1px solid #ccc}.section:last-child{border-bottom:1px solid #ccc}
+.section-num{font:34px Georgia,serif;color:#aaa}.section h2{font-size:30px;letter-spacing:-.04em;margin-bottom:22px}.section p{font-size:15px;line-height:2;color:#555;max-width:720px}
+.example{margin-top:25px;padding:25px;background:#111;color:#fff;font:22px Georgia,serif;letter-spacing:.04em}.example span{color:#aaa;margin:0 8px}.ratio{margin-top:14px;font-size:11px;letter-spacing:.12em;color:#888}
+.back{display:inline-block;margin-top:65px;color:#111;text-decoration:none;font-size:12px;letter-spacing:.12em}
+@media(max-width:800px){.nav-right{gap:13px}.page{padding-top:55px}.title-row{display:block}.number{font-size:70px;margin-top:25px}.menu{grid-template-columns:1fr 1fr}.section{grid-template-columns:1fr;gap:15px}}
+</style>
+</head>
+<body>
+<nav>
+<a class="name" href="index.html">이준영</a>
+<div class="nav-right">
+<a href="arithmetic.html">등차수열</a>
+<a href="geometric.html">등비수열</a>
+<a href="harmonic.html">조화수열</a>
+<a href="#">계차수열</a>
+</div>
+</nav>
+
+<main class="page">
+<div class="eyebrow">SEQUENCE / 03</div>
+<div class="title-row"><h1>조화수열<span style="color:#bbb">.</span></h1><div class="number">03</div></div>
+
+<p class="intro">각 항의 역수가 등차수열을 이루는 수열. 음학에서의 현의 길이나 평균 속력 계산 등 비례 관계 너머의 균형과 조화를 수학적으로 표현해 본다.</p>
+
+<div class="formula">aₙ = 1 / [ (1/a₁) + (n−1)d ] <small>일반항</small></div>
+
+<div class="menu">
+<a href="#theory"><span class="num">01</span><span class="label">이론</span><span class="eng">THEORY</span></a>
+<a href="#general"><span class="num">02</span><span class="label">일반항</span><span class="eng">GENERAL TERM</span></a>
+<a href="#real"><span class="num">03</span><span class="label">실생활 속 예시</span><span class="eng">REAL LIFE</span></a>
+<a href="#explore"><span class="num">04</span><span class="label">나의 탐구</span><span class="eng">MY RESEARCH</span></a>
+<a href="#problem"><span class="num">05</span><span class="label">문제로 이해하기</span><span class="eng">EXAMPLE</span></a>
+<a href="#compare"><span class="num">06</span><span class="label">다른 수열과 비교</span><span class="eng">COMPARE</span></a>
+</div>
+
+<div class="content">
+<section class="section" id="theory"><div class="section-num">01</div><div><h2>이론</h2><p>조화수열은 각 항의 역수(1/aₙ)를 취했을 때 등차수열이 되는 수열이다. 즉, 수열 자체는 직접적인 차이나 비가 일정하지 않지만, 역수를 통해 등차수열의 일정한 공차 규칙을 발견할 수 있다.</p><div class="example">1 <span>→</span> 1/3 <span>→</span> 1/5 <span>→</span> 1/7 <span>→</span> 1/9</div><div class="ratio">RECIPROCAL : 1, 3, 5, 7, 9 (COMMON DIFFERENCE = 2)</div></div></section>
+
+<section class="section" id="general"><div class="section-num">02</div><div><h2>일반항</h2><p>첫째 항이 a₁이고, 역수 수열의 공차가 d일 때, 조화수열의 n번째 항은 역수 수열의 일반항을 구한 뒤 다시 역수를 취하여 나타낸다.</p><div class="example">aₙ = 1 / [ (1/a₁) + (n−1)d ]</div></div></section>
+
+<section class="section" id="real"><div class="section-num">03</div><div><h2>실생활 속 예시</h2><p>동일한 거리를 왕복할 때의 평균 속력 계산, 음악에서 악기의 현 길이에 따른 음고(Pitch) 관계, 또는 렌즈의 공식을 다룰 때 조화수열과 조화평균의 개념이 활용된다.</p></div></section>
+
+<section class="section" id="explore"><div class="section-num">04</div><div><h2>나의 탐구</h2><p>피타고라스 음계에서 현의 길이 변화와 음높이 사이의 조화수열적 관계를 탐구해 볼 수 있다. 물리적인 현상 속에서 역수가 일정한 변화량을 가지는 패턴을 찾아 수학적 모델로 정립해 본다.</p></div></section>
+
+<section class="section" id="problem"><div class="section-num">05</div><div><h2>문제로 이해하기</h2><p>주어진 수열을 먼저 역수로 변환한 뒤 등차수열의 성질을 적용하여 공차 d를 구하고, 목적하는 항의 값을 계산해 본다.</p><div class="example">1/2 <span>→</span> 1/4 <span>→</span> 1/6 <span>→</span> 1/8</div></div></section>
+
+<section class="section" id="compare"><div class="section-num">06</div><div><h2>다른 수열과 비교</h2><p>등차수열이 '값의 차이'가 일정하고, 등비수열이 '값의 비율'이 일정하다면, 조화수열은 '역수의 차이'가 일정한 수열이다. 이를 통해 수열을 바라보는 관점을 역수 공간으로 확장할 수 있다.</p></div></section>
+</div>
+
+<a class="back" href="index.html">← BACK TO SEQUENCE</a>
+</main>
+</body>
+</html>
