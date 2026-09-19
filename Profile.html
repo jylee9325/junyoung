@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Profile — Junyoung Lee</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:Arial,"Noto Sans KR",sans-serif;background:#f7f7f5;color:#111;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(0,0,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,#000,transparent 90%)}
+nav{width:min(1180px,85%);height:86px;margin:auto;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:5}
+.name{font-size:14px;letter-spacing:.04em;text-decoration:none;color:#111;font-weight:600}
+.nav-right{display:flex;gap:30px}
+nav a{color:#111;text-decoration:none;font-size:13px;position:relative}
+nav a:after{content:"";position:absolute;left:0;bottom:-7px;width:0;height:1px;background:#111;transition:.3s}
+nav a:hover:after{width:100%}
+
+.page{width:min(1180px,85%);margin:auto;padding:75px 0 120px;position:relative;z-index:2}
+.eyebrow{font-size:11px;letter-spacing:.22em;color:#777;margin-bottom:25px}
+.title-row{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+h1{font-size:clamp(60px,9vw,130px);line-height:.85;letter-spacing:-.06em;font-weight:800}
+.number{font-family:Georgia,serif;font-size:110px;line-height:.8;color:#ddd}
+
+.profile-grid{margin-top:80px;display:grid;grid-template-columns:320px 1fr;gap:70px;align-items:start}
+.photo-box{position:relative;border:1px solid #111;padding:12px;background:#fff}
+.photo-box img{width:100%;height:auto;display:block;filter:grayscale(10%);transition:.4s}
+.photo-box img:hover{filter:grayscale(0%)}
+.photo-caption{margin-top:15px;font-size:11px;letter-spacing:.15em;color:#888;text-align:center;text-transform:uppercase}
+
+.info-container{display:flex;flex-direction:column;gap:50px}
+.info-section{border-top:1px solid #111;padding-top:25px}
+.info-section h2{font-size:12px;letter-spacing:.2em;color:#777;margin-bottom:20px;text-transform:uppercase}
+.info-list{display:flex;flex-direction:column;gap:16px}
+.info-item{display:grid;grid-template-columns:140px 1fr;font-size:15px;line-height:1.6}
+.info-label{color:#888;font-size:13px;letter-spacing:.05em}
+.info-value{color:#111;font-weight:500}
+.info-value a{color:#111;text-decoration:none;border-bottom:1px solid #ccc;transition:.2s}
+.info-value a:hover{border-color:#111}
+
+.bio-text{font-size:16px;line-height:1.9;color:#444;max-width:680px}
+
+.back{display:inline-block;margin-top:80px;color:#111;text-decoration:none;font-size:12px;letter-spacing:.12em;font-weight:600}
+.back:hover{text-decoration:underline}
+
+@media(max-width:850px){
+    .nav-right{gap:13px}
+    .page{padding-top:55px}
+    .title-row{display:block}
+    .number{font-size:70px;margin-top:25px}
+    .profile-grid{grid-template-columns:1fr;gap:40px}
+    .photo-box{max-width:280px;margin:auto}
+    .info-item{grid-template-columns:110px 1fr;font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+<a class="name" href="profile.html">JUNYOUNG LEE</a>
+<div class="nav-right">
+<a href="arithmetic.html">Arithmetic</a>
+<a href="geometric.html">Geometric</a>
+<a href="harmonic.html">Harmonic</a>
+<a href="difference.html">Difference</a>
+</div>
+</nav>
+
+<main class="page">
+<div class="eyebrow">STUDENT PROFILE / ARCHIVE</div>
+<div class="title-row">
+    <h1>PROFILE<span style="color:#bbb">.</span></h1>
+    <div class="number">00</div>
+</div>
+
+<div class="profile-grid">
+    <div class="photo-box">
+        <!-- 이미지 파일 경로를 확인해주세요 -->
+        <img src="학생증사진.jpg" alt="Junyoung Lee">
+        <div class="photo-caption">Student ID Photo</div>
+    </div>
+
+    <div class="info-container">
+        <div class="info-section">
+            <h2>About</h2>
+            <p class="bio-text">
+                Student at Naksaeng High School with a passion for discovering patterns, logical structures, and mathematical principles that describe the world.
+            </p>
+        </div>
+
+        <div class="info-section">
+            <h2>Personal Info</h2>
+            <div class="info-list">
+                <div class="info-item">
+                    <span class="info-label">NAME</span>
+                    <span class="info-value">Junyoung Lee (이준영)</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">EDUCATION</span>
+                    <span class="info-value">Naksaeng High School (낙생고등학교)</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">PHONE</span>
+                    <span class="info-value"><a href="tel:010-3945-9325">+82 10-3945-9325</a></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>Contact & Email</h2>
+            <div class="info-list">
+                <div class="info-item">
+                    <span class="info-label">GMAIL</span>
+                    <span class="info-value"><a href="mailto:jylee9325@gmail.com">jylee9325@gmail.com</a></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">NAVER</span>
+                    <span class="info-value"><a href="mailto:iunvouno0325@naver.com">iunvouno0325@naver.com</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a class="back" href="index.html">← BACK TO HOME</a>
+</main>
+
+</body>
+</html>
