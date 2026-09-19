@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280">
+<title>계차수열 — Sequence</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:Arial,"Noto Sans KR",sans-serif;background:#f7f7f5;color:#111;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(0,0,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,#000,transparent 90%)}
+
+nav{width:min(1280px,85%);height:90px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+.name{font-size:15px;font-weight:600}.nav-right{display:flex;gap:35px}
+nav a{color:#111;text-decoration:none;font-size:14px;position:relative}
+nav a:after{content:"";position:absolute;left:0;bottom:-7px;width:0;height:1px;background:#111;transition:.3s}
+nav a:hover:after{width:100%}
+
+.page{width:min(1280px,85%);margin:auto;padding:80px 0 140px}
+.eyebrow{font-size:12px;letter-spacing:.22em;color:#777;margin-bottom:28px}
+.title-row{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+h1{font-size:130px;line-height:.82;letter-spacing:-.075em;font-weight:800}
+.number{font-family:Georgia,serif;font-size:110px;line-height:.8;color:#ddd}
+.intro{max-width:720px;margin-top:45px;font-size:17px;line-height:1.9;color:#555}
+
+.formula{margin-top:45px;border-top:1px solid #111;border-bottom:1px solid #111;padding:28px 0;font:30px Georgia,serif}
+.formula small{font:12px Arial,sans-serif;color:#777;margin-left:20px}
+
+.menu{margin-top:80px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #111;border-left:1px solid #111}
+.menu a{min-height:150px;padding:24px;border-right:1px solid #111;border-bottom:1px solid #111;text-decoration:none;color:#111;transition:.3s;display:flex;flex-direction:column;justify-content:space-between}
+.menu a:hover{background:#111;color:#fff}
+.menu .num{font-size:12px;letter-spacing:.1em}
+.menu .label{font-size:18px;font-weight:600}
+.menu .eng{font-size:10px;letter-spacing:.15em;opacity:.5}
+
+.content{margin-top:110px}
+.section{display:grid;grid-template-columns:200px 1fr;gap:60px;padding:60px 0;border-top:1px solid #ccc}
+.section:last-child{border-bottom:1px solid #ccc}
+.section-num{font:36px Georgia,serif;color:#aaa}
+.section h2{font-size:32px;letter-spacing:-.04em;margin-bottom:22px}
+.section p{font-size:16px;line-height:2;color:#555;max-width:760px}
+
+.example{margin-top:28px;padding:28px;background:#111;color:#fff;font:24px Georgia,serif;letter-spacing:.04em}
+.example span{color:#aaa;margin:0 8px}
+.ratio{margin-top:14px;font-size:11px;letter-spacing:.12em;color:#888}
+
+.back{display:inline-block;margin-top:70px;color:#111;text-decoration:none;font-size:12px;letter-spacing:.12em}
+</style>
+</head>
+<body>
+<nav>
+<a class="name" href="index.html">이준영</a>
+<div class="nav-right">
+<a href="arithmetic.html">등차수열</a>
+<a href="geometric.html">등비수열</a>
+<a href="harmonic.html">조화수열</a>
+<a href="difference.html">계차수열</a>
+</div>
+</nav>
+
+<main class="page">
+<div class="eyebrow">SEQUENCE / 04</div>
+<div class="title-row">
+  <h1>계차수열<span style="color:#bbb">.</span></h1>
+  <div class="number">04</div>
+</div>
+
+<p class="intro">어떤 수열의 이웃하는 두 항의 차이가 만드는 또 다른 수열. 변화량의 변화를 추적하여 복잡한 패턴 속 규칙을 다단계로 분석하는 계차의 구조를 파악해 본다.</p>
+
+<div class="formula">aₙ = a₁ + Σ bₖ (k=1 to n−1) <small>일반항 (n ≥ 2)</small></div>
+
+<div class="menu">
+<a href="#theory"><span class="num">01</span><span class="label">이론</span><span class="eng">THEORY</span></a>
+<a href="#general"><span class="num">02</span><span class="label">일반항</span><span class="eng">GENERAL TERM</span></a>
+<a href="#real"><span class="num">03</span><span class="label">실생활 속 예시</span><span class="eng">REAL LIFE</span></a>
+<a href="#explore"><span class="num">04</span><span class="label">나의 탐구</span><span class="eng">MY RESEARCH</span></a>
+<a href="#problem"><span class="num">05</span><span class="label">문제로 이해하기</span><span class="eng">EXAMPLE</span></a>
+<a href="#compare"><span class="num">06</span><span class="label">다른 수열과 비교</span><span class="eng">COMPARE</span></a>
+</div>
+
+<div class="content">
+<section class="section" id="theory">
+  <div class="section-num">01</div>
+  <div>
+    <h2>이론</h2>
+    <p>수열 aₙ의 인접한 두 항의 차 bₙ = aₙ₊₁ − aₙ으로 만들어지는 수열 bₙ을 수열 aₙ의 계차수열이라고 한다. 수열 aₙ 자체에서는 직접적인 규칙이 보이지 않더라도, 항 사이의 차이인 계차 bₙ을 구하면 등차수열이나 등비수열 같은 익숙한 규칙을 찾을 수 있다.</p>
+    <div class="example">1 <span>→</span> 3 <span>→</span> 7 <span>→</span> 13 <span>→</span> 21</div>
+    <div class="ratio">DIFFERENCE (bₙ) : +2, +4, +6, +8 (COMMON DIFFERENCE = 2)</div>
+  </div>
+</section>
+
+<section class="section" id="general">
+  <div class="section-num">02</div>
+  <div>
+    <h2>일반항</h2>
+    <p>계차수열 bₙ의 첫째항부터 (n−1)번째 항까지의 합을 원래 수열의 첫째항 a₁에 더하면 n번째 항 aₙ을 구할 수 있다. (단, n ≥ 2)</p>
+    <div class="example">aₙ = a₁ + ∑ bₖ (k=1 to n−1)</div>
+  </div>
+</section>
+
+<section class="section" id="real">
+  <div class="section-num">03</div>
+  <div>
+    <h2>실생활 속 예시</h2>
+    <p>가속도가 일정한 운동에서 시간 경과에 따른 이동 거리의 변화, 세균이나 개체 수의 가속화되는 증감률, 다각형의 대각선 개수 변화 등 '변화량 자체가 일정한 규칙으로 늘어나는 현상'에서 관찰할 수 있다.</p>
+  </div>
+</section>
+
+<section class="section" id="explore">
+  <div class="section-num">04</div>
+  <div>
+    <h2>나의 탐구</h2>
+    <p>2차 이상의 다항식 구조를 가지는 데이터에서 계차를 계속해서 구하는 '다중 계차 분석'을 진행해 볼 수 있다. 1차 계차가 등차수열을 이룰 때 원래 수열이 2차식이 되는 도함수 및 미분과의 연결고리를 분석해 본다.</p>
+  </div>
+</section>
+
+<section class="section" id="problem">
+  <div class="section-num">05</div>
+  <div>
+    <h2>문제로 이해하기</h2>
+    <p>주어진 수열의 각 항 사이 차이를 계산하여 계차수열 bₙ의 일반항을 구한 뒤, 시그마(Σ) 공식을 통해 원수열 aₙ의 일반항을 도출해 본다.</p>
+    <div class="example">2 <span>→</span> 3 <span>→</span> 6 <span>→</span> 11 <span>→</span> 18</div>
+  </div>
+</section>
+
+<section class="section" id="compare">
+  <div class="section-num">06</div>
+  <div>
+    <h2>다른 수열과 비교</h2>
+    <p>등차수열은 '차이(계차)가 상수'인 가장 기초적인 수열이고, 계차수열은 '차이 자체가 또 하나의 수열'을 형성하는 확장된 구조이다. 즉, 등차수열을 한 단계 더 일반화한 개념으로 이해할 수 있다.</p>
+  </div>
+</section>
+</div>
+
+<a class="back" href="index.html">← BACK TO SEQUENCE</a>
+</main>
+</body>
+</html>
