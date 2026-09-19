@@ -9,7 +9,9 @@
 body{font-family:Arial,"Noto Sans KR",sans-serif;background:#f7f7f5;color:#111;overflow-x:hidden}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(0,0,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.035) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,#000,transparent 90%)}
 nav{width:min(1180px,85%);height:86px;margin:auto;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:5}
-.name{font-size:14px;letter-spacing:.04em;text-decoration:none;color:#111;font-weight:600}
+.name{font-size:14px;letter-spacing:.04em;text-decoration:none;color:#111;font-weight:600;position:relative}
+.name:after{content:"";position:absolute;left:0;bottom:-7px;width:0;height:1px;background:#111;transition:.3s}
+.name:hover:after{width:100%}
 .nav-right{display:flex;gap:30px}
 nav a{color:#111;text-decoration:none;font-size:13px;position:relative}
 nav a:after{content:"";position:absolute;left:0;bottom:-7px;width:0;height:1px;background:#111;transition:.3s}
@@ -56,7 +58,9 @@ h1{font-size:clamp(60px,9vw,130px);line-height:.85;letter-spacing:-.06em;font-we
 <body>
 
 <nav>
-<a class="name" href="profile.html">JUNYOUNG LEE</a>
+<!-- JUNYOUNG LEE 클릭 시 index.html로 이동하도록 연결 -->
+<a class="name" href="index.html">JUNYOUNG LEE</a>
+
 <div class="nav-right">
 <a href="arithmetic.html">Arithmetic</a>
 <a href="geometric.html">Geometric</a>
@@ -74,7 +78,6 @@ h1{font-size:clamp(60px,9vw,130px);line-height:.85;letter-spacing:-.06em;font-we
 
 <div class="profile-grid">
     <div class="photo-box">
-        <!-- 이미지 파일 경로를 확인해주세요 -->
         <img src="학생증사진.jpeg" alt="Junyoung Lee">
         <div class="photo-caption">Student ID Photo</div>
     </div>
