@@ -23,7 +23,7 @@ h1{font-size:clamp(70px,10vw,145px);line-height:.82;letter-spacing:-.075em;font-
 .formula small{font:11px Arial,sans-serif;color:#777;margin-left:20px}
 .menu{margin-top:75px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #111;border-left:1px solid #111}
 .menu a{min-height:145px;padding:22px;border-right:1px solid #111;border-bottom:1px solid #111;text-decoration:none;color:#111;transition:.3s;display:flex;flex-direction:column;justify-content:space-between}
-.menu a:hover{background:#111;color:#fff}.menu .num{font-size:11px;letter-spacing:.1em}.menu .label{font-size:18px}.menu .eng{font-size:10px;letter-spacing:.15em,.5}
+.menu a:hover{background:#111;color:#fff}.menu .num{font-size:11px;letter-spacing:.1em}.menu .label{font-size:18px}.menu .eng{font-size:10px;letter-spacing:.15em;opacity:.5}
 .content{margin-top:100px}.section{display:grid;grid-template-columns:180px 1fr;gap:50px;padding:55px 0;border-top:1px solid #ccc}.section:last-child{border-bottom:1px solid #ccc}
 .section-num{font:34px Georgia,serif;color:#aaa}.section h2{font-size:30px;letter-spacing:-.04em;margin-bottom:22px}.section p{font-size:15px;line-height:2;color:#555;max-width:720px}
 .example{margin-top:25px;padding:25px;background:#111;color:#fff;font:22px Georgia,serif;letter-spacing:.04em}.example span{color:#aaa;margin:0 8px}.ratio{margin-top:14px;font-size:11px;letter-spacing:.12em;color:#888}
@@ -32,3 +32,48 @@ h1{font-size:clamp(70px,10vw,145px);line-height:.82;letter-spacing:-.075em;font-
 </style>
 </head>
 <body>
+<nav>
+<a class="name" href="index.html">HOME</a>
+<div class="nav-right">
+<a href="arithmetic.html">등차수열</a>
+<a href="geometric.html">등비수열</a>
+<a href="harmonic.html">조화수열</a>
+<a href="difference.html" style="font-weight:bold;">계차수열</a>
+</div>
+</nav>
+
+<main class="page">
+<div class="eyebrow">SEQUENCE / 04</div>
+<div class="title-row"><h1>계차수열<span style="color:#bbb">.</span></h1><div class="number">04</div></div>
+
+<p class="intro">어떤 수열의 이웃하는 두 항의 차이로 이루어진 새로운 수열. 원수열의 규칙이 일정하지 않을 때, 그 차이들의 규칙성을 파악하여 원래 수열의 일반항을 추적해 본다.</p>
+
+<div class="formula">aₙ = a₁ + Σ (bₖ) <small>일반항 (k=1부터 n-1까지)</small></div>
+
+<div class="menu">
+<a href="#theory"><span class="num">01</span><span class="label">이론</span><span class="eng">THEORY</span></a>
+<a href="#general"><span class="num">02</span><span class="label">일반항</span><span class="eng">GENERAL TERM</span></a>
+<a href="#real"><span class="num">03</span><span class="label">실생활 속 예시</span><span class="eng">REAL LIFE</span></a>
+<a href="#explore"><span class="num">04</span><span class="label">나의 탐구</span><span class="eng">MY RESEARCH</span></a>
+<a href="#problem"><span class="num">05</span><span class="label">문제로 이해하기</span><span class="eng">EXAMPLE</span></a>
+<a href="#compare"><span class="num">06</span><span class="label">다른 수열과 비교</span><span class="eng">COMPARE</span></a>
+</div>
+
+<div class="content">
+<section class="section" id="theory"><div class="section-num">01</div><div><h2>이론</h2><p>주어진 수열의 각 항의 차이(bₙ = aₙ₊₁ - aₙ)들로 이루어진 수열을 계차수열이라고 한다. 원수열 자체는 규칙이 없어 보여도, 계차수열을 구했을 때 등차수열이나 등비수열 같은 일정한 규칙이 나타나는 경우가 많다.</p><div class="example">2 <span>→</span> 3 <span>→</span> 5 <span>→</span> 8 <span>→</span> 12</div><div class="ratio">차이: +1, +2, +3, +4 (계차수열이 등차수열)</div></div></section>
+
+<section class="section" id="general"><div class="section-num">02</div><div><h2>일반항</h2><p>첫째 항이 a₁이고 계차수열을 bₙ이라 할 때, n ≥ 2인 경우 n번째 항은 첫째 항에 계차수열의 첫째 항부터 n-1번째 항까지 모두 더한 값이 된다.</p><div class="example">aₙ = a₁ + ∑(k=1부터 n-1까지) bₖ</div></div></section>
+
+<section class="section" id="real"><div class="section-num">03</div><div><h2>실생활 속 예시</h2><p>변화율 자체가 일정하게 증가하거나 가속화되는 현상에서 나타난다. 예를 들어 바이러스의 누적 확산 속도가 매일 다르게 증가할 때, 또는 복잡한 경제 지표의 변동폭 누적 계산 등에 응용된다.</p></div></section>
+
+<section class="section" id="explore"><div class="section-num">04</div><div><h2>나의 탐구</h2><p>단순한 1차적 증가를 넘어 변화의 폭이 일정한 규칙으로 커지는 데이터를 수집하고 분석해 볼 수 있다. 계차수열을 통해 고차 함수적 모델링의 기초를 이해하고 시각화해 본다.</p></div></section>
+
+<section class="section" id="problem"><div class="section-num">05</div><div><h2>문제로 이해하기</h2><p>주어진 수열의 인접한 항들 간의 차이를 먼저 구하여 계차수열의 일반항을 유도하고, 이를 통해 원래 수열의 10번째 항 등을 찾아내는 과정을 연습한다.</p><div class="example">1 <span>→</span> 2 <span>→</span> 4 <span>→</span> 7 <span>→</span> 11</div></div></section>
+
+<section class="section" id="compare"><div class="section-num">06</div><div><h2>다른 수열과 비교</h2><p>등차수열이나 등비수열이 단일 규칙으로 한 번에 항이 전개되는 형태라면, 계차수열은 '차이들의 수열'을 매개로 하여 원수열을 완성한다는 점에서 한 단계 더 확장된 구조를 가집니다.</p></div></section>
+</div>
+
+<a class="back" href="index.html">← BACK TO SEQUENCE</a>
+</main>
+</body>
+</html>
